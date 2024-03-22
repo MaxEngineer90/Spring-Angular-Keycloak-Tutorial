@@ -1,0 +1,30 @@
+<div class="security">
+  @if (user(); as userValue) {
+    @if (userValue.anonymous) {
+      <button
+        data-testid="btn-sign-in"
+        mat-raised-button
+        (click)="signIn()"
+      >
+        Sign In
+      </button>
+    } @else {
+      <div class="flex items-center">
+        <p>Great you are logged in</p>
+
+        <p>From state</p>
+        <p>{{ user()?.name }}</p>
+
+        <p>From backend</p>
+        <p>{{ getGreetingMessage() | async }}</p>
+        <button
+          (click)="signOut()"
+          data-testid="btn-sign-out"
+          mat-raised-button
+        >
+          Sign Out
+        </button>
+      </div>
+    }
+  }
+</div>

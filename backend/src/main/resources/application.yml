@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: backend
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: "http://localhost:8081/realms/eternal"
