@@ -16,11 +16,13 @@
         <p>{{ user()?.name }}</p>
 
         <p>From backend</p>
-        <p>{{ getGreetingMessage() | async }}</p>
+        <div>
+          {{ (message$ | async) | json }}
+        </div>
         <button
           (click)="signOut()"
           data-testid="btn-sign-out"
-          mat-raised-button
+          mat-raised-buttwon
         >
           Sign Out
         </button>

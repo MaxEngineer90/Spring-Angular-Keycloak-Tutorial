@@ -1,6 +1,7 @@
 package com.backend.controller;
 
 
+import com.backend.dto.GreetingDto;
 import com.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -21,8 +22,8 @@ public class GreetingController {
 
     @GetMapping("/greet")
     @PreAuthorize("hasAuthority('ROLE_USER')")
-    public ResponseEntity<String> getShoppingCartByUser() {
+    public ResponseEntity<GreetingDto> getGreetingMessage() {
         String message = String.format("Welcome %s", userService.getUsername());
-        return ResponseEntity.ok(message);
+        return ResponseEntity.ok(new GreetingDto(message));
     }
 }

@@ -1,6 +1,11 @@
-import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
-import { AppComponent } from './app/app.component';
+import {bootstrapApplication} from '@angular/platform-browser';
+import {AppComponent} from './app/app.component';
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {SecurityInterceptor} from "./interceptor/scurity.interceptor";
 
-bootstrapApplication(AppComponent, appConfig)
-  .catch((err) => console.error(err));
+bootstrapApplication(AppComponent, {
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: SecurityInterceptor, multi: true},
+    HttpClientModule
+  ]
+}).catch(err => console.error(err));

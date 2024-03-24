@@ -1,19 +1,24 @@
-import {HttpInterceptorFn} from '@angular/common/http';
 import {SecurityStore} from "../store/security-store";
-import {inject} from "@angular/core";
+import {inject, Injectable} from "@angular/core";
+import {HttpHandler, HttpInterceptor, HttpRequest} from "@angular/common/http";
 
-export const securityInterceptor: HttpInterceptorFn = (req, next) => {
-  const keycloakService = inject(SecurityStore);
+@Injectable({
+  providedIn: 'root'
+})
+export class SecurityInterceptor implements HttpInterceptor {
 
-  const bearer = keycloakService.user()?.bearer;
+  private securityStore = inject(SecurityStore)
 
-  if (!bearer) {
-    return next(req);
+  intercept(req: HttpRequest<any>, next: HttpHandler) {
+    const bearer = this.securityStore.user()?.bearer;
+    if (!bearer) {
+      return next.handle(req);
+    }
+
+    const authReq = req.clone({
+      headers: req.headers.set('Authorization', `Bearer ${bearer}`),
+    });
+
+    return next.handle(authReq);
   }
-
-  return next(
-    req.clone({
-      headers: req.headers.set("Authorization", `Bearer ${bearer}`),
-    })
-  );
-};
+}
