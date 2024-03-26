@@ -9,9 +9,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
 
+
     public String getUsername() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Jwt jwt = ((JwtAuthenticationToken) authentication).getToken();
-        return jwt.getClaim("preferred_username");
+        return jwt.getClaim("preferred_username").toString().toUpperCase();
     }
 }

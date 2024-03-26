@@ -20,10 +20,17 @@ public class GreetingController {
     UserService userService;
 
 
-    @GetMapping("/greet")
-    @PreAuthorize("hasAuthority('ROLE_USER')")
-    public ResponseEntity<GreetingDto> getGreetingMessage() {
-        String message = String.format("Welcome %s", userService.getUsername());
+    @GetMapping("/greet/user")
+    @PreAuthorize("hasRole('eternal_user')")
+    public ResponseEntity<GreetingDto> getGreetingUserMessage() {
+        String message = String.format("Welcome %s you are in user role", userService.getUsername());
+        return ResponseEntity.ok(new GreetingDto(message));
+    }
+
+    @GetMapping("/greet/admin")
+    @PreAuthorize("hasRole('eternal_admin')")
+    public ResponseEntity<GreetingDto> getGreetingAdminMessage() {
+        String message = String.format("Welcome %s you are in admin role", userService.getUsername());
         return ResponseEntity.ok(new GreetingDto(message));
     }
 }
