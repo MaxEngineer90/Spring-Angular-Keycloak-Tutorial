@@ -11,9 +11,11 @@
 
 * update client secret
 * add user
-    * Username: John List
+    * Username: John-List
     * Password: 123
-* add group and role
+* create roles in client eternal_backend and eternal frontend
+    * eternal_user
+    * eternal_admin
 
 ## Spring
 
