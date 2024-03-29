@@ -19,7 +19,7 @@ export const appConfig: ApplicationConfig = {
     {
       provide: Configuration,
       useValue: new Configuration(
-        'http://localhost:8080/api/v1/greetings/greet',
+        'http://localhost:8080/api/v1/greetings/greet/user',
       ),
     },
   ],

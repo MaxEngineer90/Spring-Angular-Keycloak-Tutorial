@@ -10,7 +10,8 @@ services:
       - KEYCLOAK_IMPORT=/imports/realm-export.json
       - KC_LOGLEVEL=DEBUG
     volumes:
-      - ./config/:/opt/keycloak/data/import:ro
+      - ./import/:/opt/keycloak/data/import:ro
+      - ./themes/max-theme:/opt/keycloak/themes/max-theme
     entrypoint:
       [ "/opt/keycloak/bin/kc.sh", "start-dev", "--import-realm" ]
     ports:
