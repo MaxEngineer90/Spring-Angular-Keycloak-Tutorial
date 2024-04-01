@@ -10,12 +10,6 @@
 ````
 
 * update client secret
-* add user
-    * Username: John-List
-    * Password: 123
-* create roles in client eternal_backend and eternal frontend
-    * eternal_user
-    * eternal_admin
 
 ## Spring
 
@@ -30,6 +24,8 @@
 
 ## Angular
 
+* [localhost:4200](http://localhost:4200/)
+* register user by default is the role "eternal_user"
 * communicates with Keycloak using the keycloak-js library.
 * [keycloak.service.ts](frontend%2Fsrc%2Fservices%2Fkeycloak%2Fkeycloak.service.ts)
 
