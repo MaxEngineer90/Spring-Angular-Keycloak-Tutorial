@@ -3,7 +3,7 @@ version: '3.9'
 services:
   keycloak:
     container_name: keycloak_dev
-    image: quay.io/keycloak/keycloak:24.0.
+    image: quay.io/keycloak/keycloak:24.0.2
     environment:
       - KEYCLOAK_ADMIN=admin
       - KEYCLOAK_ADMIN_PASSWORD=admin
@@ -11,7 +11,7 @@ services:
       - KC_LOGLEVEL=DEBUG
     volumes:
       - ./import/:/opt/keycloak/data/import:ro
-      - ./themes/max-theme:/opt/keycloak/themes/max-theme
+      - ./themes/custom-theme:/opt/keycloak/themes/custom-theme
     entrypoint:
       [ "/opt/keycloak/bin/kc.sh", "start-dev", "--import-realm" ]
     ports:
