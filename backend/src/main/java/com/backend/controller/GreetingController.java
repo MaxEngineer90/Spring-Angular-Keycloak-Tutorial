@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,5 +34,11 @@ public class GreetingController {
     public ResponseEntity<GreetingDto> getGreetingAdminMessage() {
         String message = String.format("Welcome %s you are in admin role", userService.getUsername());
         return ResponseEntity.ok(new GreetingDto(message));
+    }
+
+    @PostMapping("/logout")
+    @PreAuthorize("hasRole('eternal_admin') or hasRole('eternal_user')")
+    public void logout() {
+        SecurityContextHolder.clearContext();
     }
 }

@@ -23,11 +23,11 @@ export class AppComponent implements OnInit {
     this.message$ = this.greetingService.getGreetingMessage();
   }
 
-  signOut() {
+  signOut(): void {
     this.#securityStore.signOut();
   }
 
-  signIn() {
+  signIn(): void {
     this.#securityStore.signIn();
   }
 }

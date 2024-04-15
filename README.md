@@ -20,7 +20,7 @@
 
 ### in this tutorial was use intellij http client to call backend
 
-* [http](backend%2Fhttp)
+* [http](http)
 
 ## Angular
 

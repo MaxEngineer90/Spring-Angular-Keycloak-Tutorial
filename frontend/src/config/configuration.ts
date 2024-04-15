@@ -1,9 +1,3 @@
-export type ConfigurationFeatures = {
-  mockHolidays: boolean;
-  mockCustomers: boolean;
-  pagedCustomers: boolean;
-};
-
 export class Configuration {
   #baseUrl: string;
 

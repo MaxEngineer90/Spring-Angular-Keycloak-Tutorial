@@ -8,8 +8,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
-
-
+    
     public String getUsername() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Jwt jwt = ((JwtAuthenticationToken) authentication).getToken();
