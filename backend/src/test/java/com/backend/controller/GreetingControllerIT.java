@@ -76,7 +76,7 @@ public class GreetingControllerIT {
     }
 
     @Test
-    public void getGreetingAdminMessage_WrongRoleReturnsUnauthorized() throws Exception {
+    public void getGreetingAdminMessage_WrongRole_ReturnsUnauthorized() throws Exception {
         UserDto mockIncorrectRoleUser = UserDto.builder()
                 .identifier(UUID.randomUUID())
                 .firstName("Charlie")
