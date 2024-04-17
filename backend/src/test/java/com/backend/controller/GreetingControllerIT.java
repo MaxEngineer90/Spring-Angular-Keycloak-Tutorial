@@ -53,7 +53,7 @@ public class GreetingControllerIT {
 
 
         mockMvc.perform(get("/api/v1/greetings/greet/admin")
-                        .with(user(mockAdminAlice))) // Use the Authentication object as the principal
+                        .with(user(mockAdminAlice)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.message").value("Welcome Alice Administrator you are in admin role"));
     }
@@ -71,7 +71,7 @@ public class GreetingControllerIT {
                 .build();
 
         mockMvc.perform(get("/api/v1/greetings/greet/admin")
-                        .principal(() -> String.valueOf(mockRegularUser)))  // Use the mock regular user as the principal
+                        .principal(() -> String.valueOf(mockRegularUser)))
                 .andExpect(status().isUnauthorized());
     }
 
@@ -83,7 +83,7 @@ public class GreetingControllerIT {
                 .lastName("Mismatch")
                 .email("charlie.mismatch@example.com")
                 .password("password")
-                .roles(List.of("NON_EXISTENT_ROLE"))  // Incorrect role
+                .roles(List.of("NON_EXISTENT_ROLE"))
                 .build();
 
         mockMvc.perform(get("/api/v1/greetings/greet/admin")
@@ -115,7 +115,7 @@ public class GreetingControllerIT {
                 .lastName("Wonderland")
                 .email("alice@example.com")
                 .password("password")
-                .roles(List.of("ADMIN"))  // Incorrect role prefix setup
+                .roles(List.of("ADMIN"))
                 .build();
 
         mockMvc.perform(get("/api/v1/greetings/greet/admin")
