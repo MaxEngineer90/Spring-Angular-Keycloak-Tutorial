@@ -1,4 +1,4 @@
-export interface User {
+export interface UserKeycloak {
   id: string;
   email: string;
   name: string;
@@ -6,7 +6,7 @@ export interface User {
   bearer: string;
 }
 
-export const ANONYMOUS_USER: User = {
+export const ANONYMOUS_USER: UserKeycloak = {
   id: '',
   email: 'nomail',
   name: 'no user',

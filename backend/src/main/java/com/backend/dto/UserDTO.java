@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,7 +20,8 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter(AccessLevel.PUBLIC)
-public class UserDto implements UserDetails {
+@Setter(AccessLevel.PUBLIC)
+public class UserDTO implements UserDetails {
 
     private UUID identifier;
     private String firstName;
@@ -27,6 +29,7 @@ public class UserDto implements UserDetails {
     private String email;
     private String password;
     private List<String> roles;
+    private AddressDTO addressDTO;
 
     @JsonIgnore
     public List<String> getRoles() {

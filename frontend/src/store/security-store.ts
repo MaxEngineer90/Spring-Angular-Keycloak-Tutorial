@@ -1,15 +1,20 @@
-import {computed, inject, Injectable, PLATFORM_ID, signal} from "@angular/core";
-import {isPlatformServer} from "@angular/common";
-import {KeycloakService} from "../services/keycloak/keycloak.service";
-import {ANONYMOUS_USER, User} from "../models/user";
+import {
+  computed,
+  inject,
+  Injectable,
+  PLATFORM_ID,
+  signal,
+} from '@angular/core';
+import { isPlatformServer } from '@angular/common';
+import { KeycloakService } from '../services/keycloak/keycloak.service';
+import { ANONYMOUS_USER, UserKeycloak } from '../models/user-keycloak';
 
-
-@Injectable({providedIn: "root"})
+@Injectable({ providedIn: 'root' })
 export class SecurityStore {
   #keycloakService = inject(KeycloakService);
 
   loaded = signal(false);
-  user = signal<User | undefined>(undefined);
+  user = signal<UserKeycloak | undefined>(undefined);
 
   loadedUser = computed(() => (this.loaded() ? this.user() : undefined));
   signedIn = computed(() => this.loaded() && !this.user()?.anonymous);
@@ -29,7 +34,7 @@ export class SecurityStore {
 
     const isLoggedIn = await keycloakService.init();
     if (isLoggedIn && keycloakService.profile) {
-      const {sub, email, given_name, family_name, token} =
+      const { sub, email, given_name, family_name, token } =
         keycloakService.profile;
       const user = {
         id: sub,

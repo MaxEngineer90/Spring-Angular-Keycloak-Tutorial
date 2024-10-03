@@ -1,6 +1,6 @@
 package com.backend.controller;
 
-import com.backend.dto.UserDto;
+import com.backend.dto.UserDTO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -24,7 +24,7 @@ public class GreetingControllerIT {
 
     @Test
     public void getGreetingUserMessage_AuthenticatedUser_ReturnsOk() throws Exception {
-        UserDto mockUser = UserDto.builder()
+        UserDTO mockUser = UserDTO.builder()
                 .identifier(UUID.randomUUID())
                 .firstName("John")
                 .lastName("Doe")
@@ -42,7 +42,7 @@ public class GreetingControllerIT {
 
     @Test
     public void getGreetingAdminMessage_AuthenticatedAdmin_ReturnsOk() throws Exception {
-        UserDto mockAdminAlice = UserDto.builder()
+        UserDTO mockAdminAlice = UserDTO.builder()
                 .identifier(UUID.randomUUID())
                 .firstName("Alice")
                 .lastName("Administrator")
@@ -61,7 +61,7 @@ public class GreetingControllerIT {
 
     @Test
     public void getGreetingAdminMessage_NonAdminUser_ReturnsUnauthorized() throws Exception {
-        UserDto mockRegularUser = UserDto.builder()
+        UserDTO mockRegularUser = UserDTO.builder()
                 .identifier(UUID.randomUUID())
                 .firstName("Bob")
                 .lastName("User")
@@ -77,7 +77,7 @@ public class GreetingControllerIT {
 
     @Test
     public void getGreetingAdminMessage_WrongRole_ReturnsUnauthorized() throws Exception {
-        UserDto mockIncorrectRoleUser = UserDto.builder()
+        UserDTO mockIncorrectRoleUser = UserDTO.builder()
                 .identifier(UUID.randomUUID())
                 .firstName("Charlie")
                 .lastName("Mismatch")
@@ -93,7 +93,7 @@ public class GreetingControllerIT {
 
     @Test
     public void getGreetingAdminMessage_UserWithoutSpecificAuthority_ReturnsForbidden() throws Exception {
-        UserDto mockSpecialRoleUser = UserDto.builder()
+        UserDTO mockSpecialRoleUser = UserDTO.builder()
                 .identifier(UUID.randomUUID())
                 .firstName("Clark")
                 .lastName("Kent")
@@ -109,7 +109,7 @@ public class GreetingControllerIT {
 
     @Test
     public void getGreetingAdminMessage_UserWithImproperlyPrefixedRole_ReturnsForbidden() throws Exception {
-        UserDto mockAdminUser = UserDto.builder()
+        UserDTO mockAdminUser = UserDTO.builder()
                 .identifier(UUID.randomUUID())
                 .firstName("Alice")
                 .lastName("Wonderland")

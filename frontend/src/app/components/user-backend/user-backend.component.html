@@ -1,0 +1,12 @@
+<h1>Welcome {{ userDto()?.firstName }}, {{ userDto()?.lastName }}</h1>
+
+<h3>Your Profile</h3>
+<span>E-Mail:{{ userDto()?.email }}</span>
+
+{{ userDto() }}
+
+<h4>Your live in</h4>
+<span>Street: {{ userDto()?.addressDTO.street }} {{ userDto()?.addressDTO.houseNumber }}</span>
+<span>Postal code: {{ userDto()?.addressDTO.postalCode }}</span>
+<span>City: {{ userDto()?.addressDTO.city }}</span>
+<span>County: {{ userDto()?.addressDTO.country }}</span>

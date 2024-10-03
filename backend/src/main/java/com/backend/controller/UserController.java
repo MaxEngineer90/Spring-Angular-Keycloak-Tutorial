@@ -1,8 +1,9 @@
 package com.backend.controller;
 
 
-import com.backend.dto.GreetingDto;
-import com.backend.dto.UserDto;
+import com.backend.dto.UserDTO;
+import com.backend.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -13,20 +14,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping(path = "/api/v1/greetings", produces = MediaType.APPLICATION_JSON_VALUE)
-public class GreetingController {
+public class UserController {
+    
+    private final UserService userService;
 
     @GetMapping("/greet/user")
     @PreAuthorize("hasRole('ETERNAL_USER')")
-    public ResponseEntity<GreetingDto> getGreetingUserMessage(@AuthenticationPrincipal UserDto user) {
-        String message = String.format("Welcome %s %s you are in user role", user.getFirstName(), user.getLastName());
-        return ResponseEntity.ok(new GreetingDto(message));
+    public ResponseEntity<UserDTO> getGreetingUserMessage(@AuthenticationPrincipal UserDTO user) {
+        return ResponseEntity.ok(userService.getUserWithAddress(user));
     }
 
     @GetMapping("/greet/admin")
     @PreAuthorize("hasRole('ETERNAL_ADMIN')")
-    public ResponseEntity<GreetingDto> getGreetingAdminMessage(@AuthenticationPrincipal UserDto user) {
-        String message = String.format("Welcome %s %s you are in admin role", user.getFirstName(), user.getLastName());
-        return ResponseEntity.ok(new GreetingDto(message));
+    public ResponseEntity<UserDTO> getGreetingAdminMessage(@AuthenticationPrincipal UserDTO user) {
+        return ResponseEntity.ok(userService.getUserWithAddress(user));
     }
 }
