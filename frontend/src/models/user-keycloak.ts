@@ -3,6 +3,7 @@ export interface UserKeycloak {
   email: string;
   name: string;
   anonymous: boolean;
+  roles: string[];
   bearer: string;
 }
 
@@ -11,5 +12,6 @@ export const ANONYMOUS_USER: UserKeycloak = {
   email: 'nomail',
   name: 'no user',
   anonymous: true,
+  roles: [],
   bearer: '',
 };

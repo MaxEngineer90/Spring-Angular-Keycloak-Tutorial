@@ -1,1 +1,12 @@
-<p>user-keycloak works!</p>
+<h1>Welcome {{ user()?.name }}</h1>
+
+<h3>Your Profile</h3>
+<div class="profile-container">
+  <span>E-Mail: {{ user()?.email }}</span>
+  <div>
+    <span>Roles: </span>
+    @for (role of user()?.roles; track role) {
+      <span>{{ role }}</span>
+    }
+  </div>
+</div>

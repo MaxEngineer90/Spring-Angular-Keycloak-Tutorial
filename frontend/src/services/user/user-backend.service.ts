@@ -12,6 +12,12 @@ export class UserBackendService {
   private readonly base_url = inject(Configuration).baseUrl;
 
   getUser(): Observable<UserDto> {
-    return this.httpClient.get<UserDto>(this.base_url).pipe(shareReplay(1));
+    const url = `${this.base_url}/user`;
+    return this.httpClient.get<UserDto>(url).pipe(shareReplay(1));
+  }
+
+  getAdmin(): Observable<UserDto> {
+    const url = `${this.base_url}/user`;
+    return this.httpClient.get<UserDto>(url).pipe(shareReplay(1));
   }
 }

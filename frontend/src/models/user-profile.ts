@@ -3,5 +3,6 @@ export interface UserProfile {
   email: string;
   given_name: string;
   family_name: string;
+  roles: string[];
   token: string;
 }

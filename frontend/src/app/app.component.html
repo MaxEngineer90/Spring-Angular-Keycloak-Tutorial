@@ -1,28 +1,39 @@
 <div class="security">
   @if (user(); as userValue) {
     @if (userValue.anonymous) {
-      <h1>Welcome in Spring-Angular-Keycloak tutorial</h1>
-
-      <div class="divider"></div>
-      <button
-        class="custom-button"
-        data-testid="btn-sign-in"
-        (click)="signIn()"
-      >
-        Sign In
-      </button>
+      <app-landing-page/>
     } @else {
       <div class="flex items-center">
-        <app-user-backend/>
+        <div class="flex items-center">
+          @if (showKeycloakUser) {
+            <app-user-keycloak/>
+          } @else {
+            <app-user-backend/>
+          }
 
-        <button
-          class="custom-button"
-          (click)="signOut()"
-          data-testid="btn-sign-out"
-        >
-          Sign Out
-        </button>
+          <div class="btn-container">
+            <button
+              class="custom-button"
+              (click)="toggleUserView()"
+              data-testid="btn-toggle-view"
+            >
+              Toggle View
+            </button>
+
+            <button
+              class="custom-button"
+              (click)="signOut()"
+              data-testid="btn-sign-out"
+            >
+              Sign Out
+            </button>
+          </div>
+
+        </div>
       </div>
     }
   }
+
 </div>
+
+
