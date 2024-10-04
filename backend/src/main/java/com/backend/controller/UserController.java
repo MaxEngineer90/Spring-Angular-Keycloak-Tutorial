@@ -23,11 +23,9 @@ public class UserController {
     @GetMapping("/user")
     @PreAuthorize("hasRole('ETERNAL_USER')")
     public ResponseEntity<UserDTO> getUser(@AuthenticationPrincipal UserDTO user) {
-
-        UserDTO newUser = userService.getUserWithAddress(user);
-        System.out.println(newUser.getRoles());
-        return ResponseEntity.ok(newUser);
+        return ResponseEntity.ok(userService.getUserWithAddress(user));
     }
+
 
     @GetMapping("/admin")
     @PreAuthorize("hasRole('ETERNAL_ADMIN')")

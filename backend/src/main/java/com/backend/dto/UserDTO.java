@@ -31,10 +31,6 @@ public class UserDTO implements UserDetails {
     private List<String> roles;
     private AddressDTO addressDTO;
 
-    @JsonIgnore
-    public List<String> getRoles() {
-        return roles;
-    }
 
     @JsonIgnore
     @Override

@@ -1,11 +1,11 @@
 #user
 GET http://localhost:8080/api/v1/users/user
 Accept: application/json
-Authorization: Bearer {{$auth.token("keycloak")}}
+Authorization: Bearer {{$auth.token("eternal")}}
 
 ###
 
 #admin
 GET http://localhost:8080/api/v1/users/admin
 Accept: application/json
-Authorization: Bearer {{$auth.token("keycloak")}}
+Authorization: Bearer {{$auth.token("eternal")}}
