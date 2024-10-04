@@ -1,36 +1,36 @@
 <div class="security">
-  @if (user(); as userValue) {
-    @if (userValue.anonymous) {
-      <button
-        data-testid="btn-sign-in"
-        mat-raised-button
-        (click)="signIn()"
-      >
-        Sign In
-      </button>
-    } @else {
+  @if (user()?.anonymous) {
+    <app-landing-page/>
+  } @else {
+    <div class="flex items-center">
       <div class="flex items-center">
-        <p>Great you are logged in</p>
+        @if (showKeycloakUser) {
+          <app-user-keycloak/>
+        } @else {
+          <app-user-backend/>
+        }
 
-        <p>From state</p>
-        <p>{{ user()?.name }}</p>
+        <div class="btn-container">
+          <button
+            class="custom-button"
+            (click)="toggleUserView()"
+            data-testid="btn-toggle-view"
+          >
+            Toggle View
+          </button>
 
-        <div style="margin-top: 10px; margin-bottom: 10px;border-top: 1px solid black; border-bottom: 1px solid black">
-
-          <p>From backend</p>
-          <p>
-            {{ (message$ | async) }}
-          </p>
-
+          <button
+            class="custom-button"
+            (click)="signOut()"
+            data-testid="btn-sign-out"
+          >
+            Sign Out
+          </button>
         </div>
-        <button
-          (click)="signOut()"
-          data-testid="btn-sign-out"
-          mat-raised-button
-        >
-          Sign Out
-        </button>
+
       </div>
-    }
+    </div>
   }
 </div>
+
+

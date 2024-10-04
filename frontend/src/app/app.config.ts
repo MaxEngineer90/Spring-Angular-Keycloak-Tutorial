@@ -18,9 +18,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withInterceptors([securityInterceptor]), withFetch()),
     {
       provide: Configuration,
-      useValue: new Configuration(
-        'http://localhost:8080/api/v1/greetings/greet/user',
-      ),
+      useValue: new Configuration('http://localhost:8080/api/v1/users'),
     },
   ],
 };

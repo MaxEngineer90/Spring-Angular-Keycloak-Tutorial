@@ -1,0 +1,19 @@
+<h1>Welcome {{ userDto()?.firstName }}, {{ userDto()?.lastName }} </h1>
+
+<h3>Your Profile</h3>
+<div class="profile-container">
+  <span>E-Mail: {{ userDto()?.email }}</span>
+  @if (userDto()?.roles) {
+    <app-role [roles]="userDto()?.roles"></app-role>
+  }
+</div>
+
+
+<h4>Your live in</h4>
+<div class="address-container">
+  <span>Street: {{ userDto()?.addressDTO?.street }} {{ userDto()?.addressDTO?.houseNumber }}</span>
+  <span>Postal code: {{ userDto()?.addressDTO?.postalCode }}</span>
+  <span>City: {{ userDto()?.addressDTO?.city }}</span>
+  <span>County: {{ userDto()?.addressDTO?.country }}</span>
+</div>
+

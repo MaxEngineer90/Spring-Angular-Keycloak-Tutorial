@@ -1,0 +1,9 @@
+<h1>Welcome {{ user()?.given_name }} {{ user()?.family_name }}</h1>
+
+<h3>Your Profile</h3>
+<div class="profile-container">
+  <span>E-Mail: {{ user()?.email }}</span>
+  <div>
+    <app-role [roles]=" user()?.roles"></app-role>
+  </div>
+</div>

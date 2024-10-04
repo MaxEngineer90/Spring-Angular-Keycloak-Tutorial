@@ -1,6 +1,6 @@
 package com.backend.security;
 
-import com.backend.dto.UserDto;
+import com.backend.dto.UserDTO;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.oauth2.jwt.Jwt;
@@ -24,7 +24,7 @@ public class UserJwtAuthenticationConverter implements Converter<Jwt, AbstractAu
 
     @Override
     public AbstractAuthenticationToken convert(Jwt jwt) {
-        UserDto productUser = UserDto.builder()
+        UserDTO productUser = UserDTO.builder()
                 .identifier(UUID.fromString(jwt.getSubject()))
                 .firstName(jwt.getClaimAsString(FIRST_NAME_CLAIM))
                 .lastName(jwt.getClaimAsString(LAST_NAME_CLAIM))

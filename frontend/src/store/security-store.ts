@@ -1,18 +1,22 @@
-import {computed, inject, Injectable, PLATFORM_ID, signal} from "@angular/core";
-import {isPlatformServer} from "@angular/common";
-import {KeycloakService} from "../services/keycloak/keycloak.service";
-import {ANONYMOUS_USER, User} from "../models/user";
+import {
+  computed,
+  inject,
+  Injectable,
+  PLATFORM_ID,
+  signal,
+} from '@angular/core';
+import { isPlatformServer } from '@angular/common';
+import { KeycloakService } from '../services/keycloak/keycloak.service';
+import { ANONYMOUS_USER, UserProfile } from '../models/user-profile';
 
-
-@Injectable({providedIn: "root"})
+@Injectable({ providedIn: 'root' })
 export class SecurityStore {
   #keycloakService = inject(KeycloakService);
 
   loaded = signal(false);
-  user = signal<User | undefined>(undefined);
+  user = signal<UserProfile | undefined>(undefined);
 
   loadedUser = computed(() => (this.loaded() ? this.user() : undefined));
-  signedIn = computed(() => this.loaded() && !this.user()?.anonymous);
 
   constructor() {
     this.onInit();
@@ -29,14 +33,16 @@ export class SecurityStore {
 
     const isLoggedIn = await keycloakService.init();
     if (isLoggedIn && keycloakService.profile) {
-      const {sub, email, given_name, family_name, token} =
+      const { sub, email, given_name, family_name, token, roles } =
         keycloakService.profile;
-      const user = {
-        id: sub,
+      const user: UserProfile = {
+        sub: sub,
         email,
-        name: `${given_name} ${family_name}`,
+        given_name: given_name,
+        family_name: family_name,
+        roles: roles,
+        token: token,
         anonymous: false,
-        bearer: token,
       };
       this.user.set(user);
       this.loaded.set(true);
