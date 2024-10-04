@@ -15,20 +15,23 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = "/api/v1/greetings", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/api/v1/users", produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserController {
-    
+
     private final UserService userService;
 
-    @GetMapping("/greet/user")
+    @GetMapping("/user")
     @PreAuthorize("hasRole('ETERNAL_USER')")
-    public ResponseEntity<UserDTO> getGreetingUserMessage(@AuthenticationPrincipal UserDTO user) {
-        return ResponseEntity.ok(userService.getUserWithAddress(user));
+    public ResponseEntity<UserDTO> getUser(@AuthenticationPrincipal UserDTO user) {
+
+        UserDTO newUser = userService.getUserWithAddress(user);
+        System.out.println(newUser.getRoles());
+        return ResponseEntity.ok(newUser);
     }
 
-    @GetMapping("/greet/admin")
+    @GetMapping("/admin")
     @PreAuthorize("hasRole('ETERNAL_ADMIN')")
-    public ResponseEntity<UserDTO> getGreetingAdminMessage(@AuthenticationPrincipal UserDTO user) {
+    public ResponseEntity<UserDTO> getAdmin(@AuthenticationPrincipal UserDTO user) {
         return ResponseEntity.ok(userService.getUserWithAddress(user));
     }
 }
