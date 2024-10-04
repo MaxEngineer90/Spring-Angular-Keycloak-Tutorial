@@ -1,39 +1,36 @@
 <div class="security">
-  @if (user(); as userValue) {
-    @if (userValue.anonymous) {
-      <app-landing-page/>
-    } @else {
+  @if (user()?.anonymous) {
+    <app-landing-page/>
+  } @else {
+    <div class="flex items-center">
       <div class="flex items-center">
-        <div class="flex items-center">
-          @if (showKeycloakUser) {
-            <app-user-keycloak/>
-          } @else {
-            <app-user-backend/>
-          }
+        @if (showKeycloakUser) {
+          <app-user-keycloak/>
+        } @else {
+          <app-user-backend/>
+        }
 
-          <div class="btn-container">
-            <button
-              class="custom-button"
-              (click)="toggleUserView()"
-              data-testid="btn-toggle-view"
-            >
-              Toggle View
-            </button>
+        <div class="btn-container">
+          <button
+            class="custom-button"
+            (click)="toggleUserView()"
+            data-testid="btn-toggle-view"
+          >
+            Toggle View
+          </button>
 
-            <button
-              class="custom-button"
-              (click)="signOut()"
-              data-testid="btn-sign-out"
-            >
-              Sign Out
-            </button>
-          </div>
-
+          <button
+            class="custom-button"
+            (click)="signOut()"
+            data-testid="btn-sign-out"
+          >
+            Sign Out
+          </button>
         </div>
-      </div>
-    }
-  }
 
+      </div>
+    </div>
+  }
 </div>
 
 
