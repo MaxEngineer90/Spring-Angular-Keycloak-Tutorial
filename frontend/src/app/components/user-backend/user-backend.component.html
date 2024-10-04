@@ -1,15 +1,10 @@
-<h1>Welcome {{ userDto()?.firstName }}, {{ userDto()?.lastName }}</h1>
+<h1>Welcome {{ userDto()?.firstName }}, {{ userDto()?.lastName }} </h1>
 
 <h3>Your Profile</h3>
 <div class="profile-container">
   <span>E-Mail: {{ userDto()?.email }}</span>
   @if (userDto()?.roles) {
-    <div>
-      <!--<span>Roles:</span>
-      @for (role of userDto()?.roles; track role) {
-        <span>{{ role }}</span>
-      }-->
-    </div>
+    <app-role [roles]="userDto()?.roles"></app-role>
   }
 </div>
 
@@ -21,3 +16,4 @@
   <span>City: {{ userDto()?.addressDTO?.city }}</span>
   <span>County: {{ userDto()?.addressDTO?.country }}</span>
 </div>
+
