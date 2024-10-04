@@ -30,9 +30,23 @@ export class KeycloakService {
     if (!authenticated) {
       return authenticated;
     }
-    this.profile =
-      (await this.keycloak.loadUserInfo()) as unknown as UserProfile;
-    this.profile.token = this.keycloak.token || '';
+
+    // Token abrufen und dekodieren
+    const token = this.keycloak.token || '';
+    const decodedToken = this.decodeToken(token);
+
+    // Rollen aus dem Token extrahieren
+    const roles = decodedToken?.resource_access?.eternal_frontend?.roles || [];
+
+    // UserProfile mit den ausgelesenen Daten befüllen
+    this.profile = {
+      sub: decodedToken.sub,
+      email: decodedToken.email,
+      given_name: decodedToken.given_name,
+      family_name: decodedToken.family_name,
+      roles: roles,
+      token: token,
+    };
 
     return true;
   }
@@ -43,5 +57,19 @@ export class KeycloakService {
 
   logout(): Promise<void> {
     return this.keycloak.logout();
+  }
+
+  private decodeToken(token: string): any {
+    if (!token) {
+      return null;
+    }
+
+    const parts = token.split('.');
+    if (parts.length !== 3) {
+      return null;
+    }
+
+    const payload = atob(parts[1]);
+    return JSON.parse(payload);
   }
 }
