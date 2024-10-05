@@ -13,25 +13,25 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4  # Neueste Version des Checkout-Action
+        uses: actions/checkout@v4
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3  # Neueste Version von Docker Buildx Setup
+        uses: docker/setup-buildx-action@v3
 
       - name: Log in to Docker Hub
-        uses: docker/login-action@v3  # Neueste Version für Docker Login
+        uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
 
       - name: Build and push Backend Docker image
-        working-directory: ./backend  # Pfad zu deinem Backend-Verzeichnis
+        working-directory: ./backend
         run: |
           docker build -t ${{ secrets.DOCKER_USERNAME }}/backend:latest -f Dockerfile .
           docker push ${{ secrets.DOCKER_USERNAME }}/backend:latest
 
       - name: Build and push Frontend Docker image
-        working-directory: ./frontend  # Pfad zu deinem Frontend-Verzeichnis
+        working-directory: ./frontend
         run: |
           docker build -t ${{ secrets.DOCKER_USERNAME }}/frontend:latest -f Dockerfile .
           docker push ${{ secrets.DOCKER_USERNAME }}/frontend:latest
