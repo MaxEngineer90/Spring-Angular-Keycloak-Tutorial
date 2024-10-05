@@ -27,11 +27,11 @@ jobs:
       - name: Build and push Backend Docker image
         working-directory: ./backend  # Pfad zu deinem Backend-Verzeichnis
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/backend:${{ github.sha }} -f Dockerfile.backend .
-          docker push ${{ secrets.DOCKER_USERNAME }}/backend:${{ github.sha }}
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/backend:latest -f Dockerfile .
+          docker push ${{ secrets.DOCKER_USERNAME }}/backend:latest
 
       - name: Build and push Frontend Docker image
         working-directory: ./frontend  # Pfad zu deinem Frontend-Verzeichnis
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/frontend:${{ github.sha }} -f Dockerfile.frontend .
-          docker push ${{ secrets.DOCKER_USERNAME }}/frontend:${{ github.sha }}
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/frontend:latest -f Dockerfile .
+          docker push ${{ secrets.DOCKER_USERNAME }}/frontend:latest
