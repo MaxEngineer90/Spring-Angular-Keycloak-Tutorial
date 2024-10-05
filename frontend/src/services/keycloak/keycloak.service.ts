@@ -12,7 +12,7 @@ export class KeycloakService {
   get keycloak() {
     if (!this._keycloak) {
       this._keycloak = new Keycloak({
-        url: 'http://localhost:8081',
+        url: 'http://localhost',
         realm: 'eternal',
         clientId: 'eternal_frontend',
       });

@@ -78,7 +78,7 @@ configuration.
           "Type": "OAuth2",
           "Grant Type": "Password",
           "Client ID": "eternal_backend",
-          "Token URL": "http://localhost:8081/realms/eternal/protocol/openid-connect/token",
+          "Token URL": "http://localhost/realms/eternal/protocol/openid-connect/token",
           "Username": "{{greet-user}}",
           "Password": "{{greet-password}}"
         }
