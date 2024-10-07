@@ -19,7 +19,7 @@ services:
     networks:
       - local
     healthcheck:
-      test: [ "CMD", "curl", "-f", "https://localhost:8443/auth" ]
+      test: [ "CMD", "curl", "-f", "https://localhost/auth" ]
       interval: 300s
       timeout: 10s
       retries: 5
@@ -39,20 +39,6 @@ services:
     restart: always
     networks:
       - local
-
-  certbot:
-    image: certbot/certbot:${CERTBOT_VERSION:-latest}
-    environment:
-      CERTBOT_LETSENCRYPT_EMAIL: ${CERTBOT_LETSENCRYPT_EMAIL}
-      KEYCLOAK_DOMAIN: ${KEYCLOAK_DOMAIN}
-    container_name: certbot
-    volumes:
-      - ./certbot/conf:/etc/letsencrypt
-      - ./certbot/www:/var/www/certbot
-    command: certonly --non-interactive --webroot -w /var/www/certbot --email ${CERTBOT_LETSENCRYPT_EMAIL} -d ${KEYCLOAK_DOMAIN} --agree-tos
-    depends_on:
-      - nginx
-
 
 volumes:
   letsencrypt:
